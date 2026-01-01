@@ -61,7 +61,7 @@ export async function PATCH(
         const { data: comment, error } = await supabase
             .from("comments")
             .update({ content: content.trim() })
-            .eq("id", params.id)
+            .eq("id", id)
             .select(
                 `
         *,
