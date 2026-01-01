@@ -214,196 +214,163 @@ export default function PostEditor({ initialData }: PostEditorProps) {
                             <button
                                 onClick={() => handleSave("published")}
                                 disabled={saving}
-                                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-black text-white font-semibold hover:bg-gray-800 transition-all duration-300 disabled:opacity-50"
-                            >
-                                <Eye className="w-5 h-5" />
-                                <span>{saving ? "Publishing..." : "Publish"}</span>
-                            </button>
-                        </div>
+                    </select>
+                        <p className="text-sm text-gray-500 mt-1">
+                            This will be displayed as the post author
+                        </p>
                     </div>
 
-                    {/* Main Form */}
-                    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 space-y-6">
-                        {/* Author Selection */}
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                                <div className="flex items-center gap-2">
-                                    <User className="w-4 h-4" />
-                                    Author *
-                                </div>
-                            </label>
-                            <select
-                                value={authorId}
-                                onChange={(e) => setAuthorId(e.target.value)}
-                                required
-                                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                            >
-                                <option value="">Select an author...</option>
-                                {authors.map((author) => (
-                                    <option key={author.id} value={author.id}>
-                                        {author.full_name || author.email}
-                                        {author.id === currentUserId ? " (You)" : ""}
-                                    </option>
-                                ))}
-                            </select>
-                            <p className="text-sm text-gray-500 mt-1">
-                                This will be displayed as the post author
-                            </p>
-                        </div>
+                    {/* Language Selection */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Language *
+                        </label>
+                        <select
+                            value={language}
+                            onChange={(e) => setLanguage(e.target.value)}
+                            required
+                            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+                        >
+                            <option value="en">English</option>
+                            <option value="ml">മലയാളം (Malayalam)</option>
+                        </select>
+                        <p className="text-sm text-gray-500 mt-1">
+                            Select the language of your post content
+                        </p>
+                    </div>
 
-                        {/* Language Selection */}
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                                Language *
-                            </label>
-                            <select
-                                value={language}
-                                onChange={(e) => setLanguage(e.target.value)}
-                                required
-                                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                            >
-                                <option value="en">English</option>
-                                <option value="ml">മലയാളം (Malayalam)</option>
-                            </select>
-                            <p className="text-sm text-gray-500 mt-1">
-                                Select the language of your post content
-                            </p>
-                        </div>
+                    {/* Category Selection */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                            <div className="flex items-center gap-2">
+                                <FolderOpen className="w-4 h-4" />
+                                Category
+                            </div>
+                        </label>
+                        <select
+                            value={categoryId}
+                            onChange={(e) => setCategoryId(e.target.value)}
+                            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+                        >
+                            <option value="">No Category</option>
+                            {categories.map((category) => (
+                                <option key={category.id} value={category.id}>
+                                    {category.icon} {category.name}
+                                </option>
+                            ))}
+                        </select>
+                        <p className="text-sm text-gray-500 mt-1">
+                            Organize your post by topic
+                        </p>
+                    </div>
 
-                        {/* Category Selection */}
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                                <div className="flex items-center gap-2">
-                                    <FolderOpen className="w-4 h-4" />
-                                    Category
-                                </div>
-                            </label>
-                            <select
-                                value={categoryId}
-                                onChange={(e) => setCategoryId(e.target.value)}
-                                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                            >
-                                <option value="">No Category</option>
-                                {categories.map((category) => (
-                                    <option key={category.id} value={category.id}>
-                                        {category.icon} {category.name}
-                                    </option>
-                                ))}
-                            </select>
-                            <p className="text-sm text-gray-500 mt-1">
-                                Organize your post by topic
-                            </p>
-                        </div>
-
-                        {/* Tags Selection */}
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                                <div className="flex items-center gap-2">
-                                    <Hash className="w-4 h-4" />
-                                    Tags
-                                </div>
-                            </label>
-                            <TagSelector
-                                selectedTags={selectedTags}
-                                onChange={setSelectedTags}
-                            />
-                            <p className="text-sm text-gray-500 mt-1">
-                                Add keywords to help readers find your post
-                            </p>
-                        </div>
-
-                        {/* Title */}
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                                Title *
-                            </label>
-                            <input
-                                type="text"
-                                value={title}
-                                onChange={(e) => setTitle(e.target.value)}
-                                required
-                                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all text-base"
-                                placeholder="Enter post title..."
-                            />
-                        </div>
-
-                        {/* Slug */}
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                                URL Slug
-                            </label>
-                            <input
-                                type="text"
-                                value={slug}
-                                onChange={(e) => setSlug(e.target.value)}
-                                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                                placeholder="post-url-slug"
-                            />
-                            <p className="text-sm text-gray-500 mt-1">
-                                URL: /blogs/{slug || "post-url-slug"}
-                            </p>
-                        </div>
-
-                        {/* Excerpt */}
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                                Excerpt
-                            </label>
-                            <textarea
-                                value={excerpt}
-                                onChange={(e) => setExcerpt(e.target.value)}
-                                rows={3}
-                                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all resize-none"
-                                placeholder="Brief description of your post..."
-                            />
-                        </div>
-
-                        {/* Featured Image - NOW WITH DRAG & DROP! */}
-                        <ImageUpload
-                            label="Featured Image *"
-                            value={featuredImage}
-                            onChange={setFeaturedImage}
-                            onRemove={() => setFeaturedImage("")}
-                            folder="fikr-blog/posts"
+                    {/* Tags Selection */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                            <div className="flex items-center gap-2">
+                                <Hash className="w-4 h-4" />
+                                Tags
+                            </div>
+                        </label>
+                        <TagSelector
+                            selectedTags={selectedTags}
+                            onChange={setSelectedTags}
                         />
+                        <p className="text-sm text-gray-500 mt-1">
+                            Add keywords to help readers find your post
+                        </p>
+                    </div>
 
-                        {/* Content */}
-                        <div>
-                            <div className="flex items-center justify-between mb-2">
-                                <label className="block text-sm font-medium text-gray-700">
-                                    Content *
-                                </label>
-                                <EditorImageUpload onImageInsert={(img) => setContent((prev) => prev + "\n\n" + img + "\n\n")} />
-                            </div>
-                            <div data-color-mode="light">
-                                <MDEditor
-                                    value={content}
-                                    onChange={(val) => setContent(val || "")}
-                                    height={500}
-                                    preview={preview ? "preview" : "edit"}
-                                />
-                            </div>
-                            <p className="text-sm text-gray-500 mt-2">
-                                💡 Tip: Click "Insert Image" to upload images directly into your content
-                            </p>
-                        </div>
+                    {/* Title */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Title *
+                        </label>
+                        <input
+                            type="text"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            required
+                            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all text-base"
+                            placeholder="Enter post title..."
+                        />
+                    </div>
 
-                        {/* Featured Toggle */}
-                        <div className="flex items-center gap-3">
-                            <input
-                                type="checkbox"
-                                id="featured"
-                                checked={isFeatured}
-                                onChange={(e) => setIsFeatured(e.target.checked)}
-                                className="w-4 h-4 rounded border-gray-300 text-black focus:ring-black"
-                            />
-                            <label htmlFor="featured" className="text-sm font-medium text-gray-700">
-                                Feature this post on homepage carousel
+                    {/* Slug */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                            URL Slug
+                        </label>
+                        <input
+                            type="text"
+                            value={slug}
+                            onChange={(e) => setSlug(e.target.value)}
+                            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+                            placeholder="post-url-slug"
+                        />
+                        <p className="text-sm text-gray-500 mt-1">
+                            URL: /blogs/{slug || "post-url-slug"}
+                        </p>
+                    </div>
+
+                    {/* Excerpt */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Excerpt
+                        </label>
+                        <textarea
+                            value={excerpt}
+                            onChange={(e) => setExcerpt(e.target.value)}
+                            rows={3}
+                            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all resize-none"
+                            placeholder="Brief description of your post..."
+                        />
+                    </div>
+
+                    {/* Featured Image - NOW WITH DRAG & DROP! */}
+                    <ImageUpload
+                        label="Featured Image *"
+                        value={featuredImage}
+                        onChange={setFeaturedImage}
+                        onRemove={() => setFeaturedImage("")}
+                        folder="fikr-blog/posts"
+                    />
+
+                    {/* Content */}
+                    <div>
+                        <div className="flex items-center justify-between mb-2">
+                            <label className="block text-sm font-medium text-gray-700">
+                                Content *
                             </label>
+                            <EditorImageUpload onImageInsert={(img) => setContent((prev) => prev + "\n\n" + img + "\n\n")} />
                         </div>
+                        <div data-color-mode="light">
+                            <MDEditor
+                                value={content}
+                                onChange={(val) => setContent(val || "")}
+                                height={500}
+                                preview={preview ? "preview" : "edit"}
+                            />
+                        </div>
+                        <p className="text-sm text-gray-500 mt-2">
+                            💡 Tip: Click "Insert Image" to upload images directly into your content
+                        </p>
+                    </div>
+
+                    {/* Featured Toggle */}
+                    <div className="flex items-center gap-3">
+                        <input
+                            type="checkbox"
+                            id="featured"
+                            checked={isFeatured}
+                            onChange={(e) => setIsFeatured(e.target.checked)}
+                            className="w-4 h-4 rounded border-gray-300 text-black focus:ring-black"
+                        />
+                        <label htmlFor="featured" className="text-sm font-medium text-gray-700">
+                            Feature this post on homepage carousel
+                        </label>
                     </div>
                 </div>
-            )}
             </div>
             );
 }
