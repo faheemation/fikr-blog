@@ -187,58 +187,187 @@ export default function PostEditor({ initialData }: PostEditorProps) {
                 </div>
             </div>
 
-            <div className="space-y-6">
-                <input
-                    value={title}
-                    onChange={e => setTitle(e.target.value)}
-                    placeholder="Title"
-                    className="w-full border px-4 py-3 rounded"
-                />
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 space-y-6">
+                {/* Author Selection */}
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Author *
+                    </label>
+                    <select
+                        value={authorId}
+                        onChange={(e) => setAuthorId(e.target.value)}
+                        required
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+                    >
+                        <option value="">Select an author...</option>
+                        {authors.map((author) => (
+                            <option key={author.id} value={author.id}>
+                                {author.full_name || author.email}
+                            </option>
+                        ))}
+                    </select>
+                    <p className="text-sm text-gray-500 mt-1">
+                        This will be displayed as the post author
+                    </p>
+                </div>
 
-                <input
-                    value={slug}
-                    onChange={e => setSlug(e.target.value)}
-                    placeholder="Slug"
-                    className="w-full border px-4 py-3 rounded"
-                />
+                {/* Language Selection */}
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Language *
+                    </label>
+                    <select
+                        value={language}
+                        onChange={(e) => setLanguage(e.target.value)}
+                        required
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+                    >
+                        <option value="en">English</option>
+                        <option value="ml">മലയാളം (Malayalam)</option>
+                    </select>
+                    <p className="text-sm text-gray-500 mt-1">
+                        Select the language of your post content
+                    </p>
+                </div>
 
-                <textarea
-                    value={excerpt}
-                    onChange={e => setExcerpt(e.target.value)}
-                    rows={3}
-                    className="w-full border px-4 py-3 rounded"
-                />
+                {/* Category Selection */}
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <div className="flex items-center gap-2">
+                            <FolderOpen className="w-4 h-4" />
+                            Category
+                        </div>
+                    </label>
+                    <select
+                        value={categoryId}
+                        onChange={(e) => setCategoryId(e.target.value)}
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+                    >
+                        <option value="">No Category</option>
+                        {categories.map((category) => (
+                            <option key={category.id} value={category.id}>
+                                {category.icon} {category.name}
+                            </option>
+                        ))}
+                    </select>
+                    <p className="text-sm text-gray-500 mt-1">
+                        Organize your post by topic
+                    </p>
+                </div>
 
+                {/* Title */}
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Title *
+                    </label>
+                    <input
+                        type="text"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        required
+                        placeholder="Enter post title..."
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+                    />
+                </div>
+
+                {/* Slug */}
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                        URL Slug
+                    </label>
+                    <input
+                        type="text"
+                        value={slug}
+                        onChange={(e) => setSlug(e.target.value)}
+                        placeholder="post-url-slug"
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+                    />
+                    <p className="text-sm text-gray-500 mt-1">
+                        URL: /blogs/{slug || "post-url-slug"}
+                    </p>
+                </div>
+
+                {/* Excerpt */}
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Excerpt
+                    </label>
+                    <textarea
+                        value={excerpt}
+                        onChange={(e) => setExcerpt(e.target.value)}
+                        rows={3}
+                        placeholder="Brief description of your post..."
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all resize-none"
+                    />
+                </div>
+
+                {/* Featured Image */}
                 <ImageUpload
-                    label="Featured Image"
+                    label="Featured Image *"
                     value={featuredImage}
                     onChange={setFeaturedImage}
                     onRemove={() => setFeaturedImage("")}
                     folder="fikr-blog/posts"
                 />
 
-                <EditorImageUpload
-                    onImageInsert={img => setContent(prev => prev + "\n\n" + img + "\n\n")}
-                />
-
-                <div data-color-mode="light">
-                    <MDEditor
-                        value={content}
-                        onChange={val => setContent(val || "")}
-                        height={500}
-                        preview={preview ? "preview" : "edit"}
-                    />
+                {/* Content */}
+                <div>
+                    <div className="flex items-center justify-between mb-2">
+                        <label className="block text-sm font-medium text-gray-700">
+                            Content *
+                        </label>
+                        <div className="flex items-center gap-2">
+                            <button
+                                type="button"
+                                onClick={() => setPreview(!preview)}
+                                className="px-3 py-1 text-sm rounded-lg border border-gray-300 hover:bg-gray-50 transition-colors"
+                            >
+                                {preview ? "Edit" : "Preview"}
+                            </button>
+                            <EditorImageUpload
+                                onImageInsert={(img) => setContent((prev) => prev + "\n\n" + img + "\n\n")}
+                            />
+                        </div>
+                    </div>
+                    <div data-color-mode="light">
+                        <MDEditor
+                            value={content}
+                            onChange={(val) => setContent(val || "")}
+                            height={500}
+                            preview={preview ? "preview" : "edit"}
+                        />
+                    </div>
+                    <p className="text-sm text-gray-500 mt-2">
+                        💡 Tip: Click "Insert Image" to upload images directly into your content
+                    </p>
                 </div>
 
-                <TagSelector selectedTags={selectedTags} onChange={setSelectedTags} />
+                {/* Tags */}
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <div className="flex items-center gap-2">
+                            <Hash className="w-4 h-4" />
+                            Tags
+                        </div>
+                    </label>
+                    <TagSelector selectedTags={selectedTags} onChange={setSelectedTags} />
+                    <p className="text-sm text-gray-500 mt-1">
+                        Add keywords to help readers find your post
+                    </p>
+                </div>
 
-                <div className="flex items-center gap-2">
+                {/* Featured Toggle */}
+                <div className="flex items-center gap-3">
                     <input
                         type="checkbox"
+                        id="featured"
                         checked={isFeatured}
-                        onChange={e => setIsFeatured(e.target.checked)}
+                        onChange={(e) => setIsFeatured(e.target.checked)}
+                        className="w-4 h-4 rounded border-gray-300 text-black focus:ring-black"
                     />
-                    <span>Feature this post</span>
+                    <label htmlFor="featured" className="text-sm font-medium text-gray-700">
+                        Feature this post on homepage carousel
+                    </label>
                 </div>
             </div>
         </div>
