@@ -211,12 +211,12 @@ export default function Navigation() {
                     {/* Mobile Menu Button */}
                     <button
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        className="md:hidden p-2 rounded-xl hover:bg-white/10 transition-all duration-200 text-white"
+                        className="md:hidden p-2 rounded-xl hover:bg-white/10 transition-all duration-200"
                     >
                         {mobileMenuOpen ? (
-                            <X className="w-6 h-6" />
+                            <X className="w-6 h-6 text-white" />
                         ) : (
-                            <Menu className="w-6 h-6" />
+                            <Menu className="w-6 h-6 text-white" />
                         )}
                     </button>
                 </div>
