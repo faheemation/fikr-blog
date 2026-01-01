@@ -21,7 +21,7 @@ export default async function BlogsPage({ searchParams }: BlogsPageProps) {
         <>
             <Navigation />
 
-            <main className="min-h-screen bg-white pt-20">
+            <main className="min-h-screen bg-gray-50 pt-16">
                 {/* Header */}
                 <section className="py-16 bg-black text-white">
                     <div className="container-custom">
@@ -99,8 +99,8 @@ export default async function BlogsPage({ searchParams }: BlogsPageProps) {
                                                         key={page}
                                                         href={`/blogs?page=${page}`}
                                                         className={`w-12 h-12 flex items-center justify-center rounded-full font-semibold transition-all duration-300 ${page === currentPage
-                                                                ? "bg-black text-white"
-                                                                : "bg-gray-100 hover:bg-gray-200 text-gray-700"
+                                                            ? "bg-black text-white"
+                                                            : "bg-gray-100 hover:bg-gray-200 text-gray-700"
                                                             }`}
                                                     >
                                                         {page}

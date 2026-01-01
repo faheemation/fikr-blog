@@ -7,7 +7,7 @@ export default function AboutPage() {
         <>
             <Navigation />
 
-            <main className="min-h-screen bg-white pt-20">
+            <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 pt-16">
                 {/* Hero */}
                 <section className="py-24 bg-black text-white">
                     <div className="container-custom">
