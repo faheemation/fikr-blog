@@ -11,6 +11,19 @@ export type PostWithAuthor = Post & {
     author: Profile
     likes_count?: number
     comments_count?: number
+    category?: {
+        id: string
+        name: string
+        slug: string
+        color: string
+        icon: string
+    } | null
+    tags?: Array<{
+        id: string
+        name: string
+        slug: string
+        color: string
+    }>
 }
 
 export type CommentWithUser = Comment & {
