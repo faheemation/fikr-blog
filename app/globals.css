@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --gradient-1: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+    --gradient-2: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+    --gradient-3: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+    --gradient-4: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-white dark:bg-black text-black dark:text-white antialiased;
+  }
+
+  /* Premium typography */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif font-bold;
+  }
+
+  p {
+    @apply leading-relaxed;
+  }
+}
+
+@layer components {
+
+  /* Glassmorphism card - black and white */
+  .glass {
+    @apply bg-white/10 dark:bg-black/10 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-glass;
+  }
+
+  /* Premium gradient text - black and white */
+  .gradient-text {
+    @apply text-black dark:text-white;
+  }
+
+  /* Hover lift effect */
+  .hover-lift {
+    @apply transition-all duration-300 hover:scale-105 hover:shadow-2xl;
+  }
+
+  /* Glow effect - white glow */
+  .glow {
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+  }
+
+  /* Premium button - black and white */
+  .btn-premium {
+    @apply relative px-8 py-4 rounded-full font-semibold overflow-hidden;
+    @apply bg-white text-black border-2 border-black;
+    @apply hover:bg-black hover:text-white hover:border-white transition-all duration-300;
+  }
+
+  .btn-premium span {
+    @apply relative z-10;
+  }
+
+  /* Animated gradient background - black and white */
+  .animated-gradient {
+    background: linear-gradient(270deg, #000000, #1a1a1a, #2a2a2a, #1a1a1a);
+    background-size: 800% 800%;
+    animation: gradient 15s ease infinite;
+  }
+
+  /* Article card with premium hover */
+  .article-card {
+    @apply relative overflow-hidden rounded-2xl bg-white dark:bg-neutral-900;
+    @apply border border-gray-200 dark:border-neutral-800;
+    @apply transition-all duration-500 hover:shadow-2xl;
+    @apply hover:-translate-y-2;
+  }
+
+  .article-card::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-black/0 to-black/0;
+    @apply transition-all duration-500;
+  }
+
+  .article-card:hover::before {
+    @apply from-black/5 to-black/10;
+  }
+
+  /* Content container */
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Prose styling for markdown */
+  .prose-custom {
+    @apply prose prose-lg dark:prose-invert max-w-none;
+    @apply prose-headings:font-serif prose-headings:font-bold;
+    @apply prose-p:text-gray-700 dark:prose-p:text-gray-300;
+    @apply prose-a:text-black dark:prose-a:text-white;
+    @apply prose-a:no-underline hover:prose-a:underline;
+    @apply prose-code:text-black dark:prose-code:text-white;
+    @apply prose-code:bg-gray-100 dark:prose-code:bg-neutral-800;
+    @apply prose-code:px-2 prose-code:py-1 prose-code:rounded;
+  }
+}
+
+@layer utilities {
+
+  /* Text gradient utilities - black and white */
+  .text-gradient-purple {
+    @apply text-black dark:text-white;
+  }
+
+  .text-gradient-blue {
+    @apply text-black dark:text-white;
+  }
+
+  .text-gradient-sunset {
+    @apply text-black dark:text-white;
+  }
+
+  /* Backdrop blur utilities */
+  .backdrop-blur-glass {
+    backdrop-filter: blur(20px) saturate(180%);
+  }
+}
+
+/* Custom scrollbar - black and white */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-neutral-900;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-black dark:bg-white rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-800 dark:bg-gray-200;
+}
+
+/* Malayalam typography */
+.malayalam-text,
+[lang="ml"],
+[data-language="ml"] {
+  font-family: var(--font-malayalam), sans-serif;
+}
