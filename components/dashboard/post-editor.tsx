@@ -403,5 +403,7 @@ export default function PostEditor({ initialData }: PostEditorProps) {
                         </div>
                     </div>
                 </div>
-                );
+            )}
+            </div>
+            );
 }
