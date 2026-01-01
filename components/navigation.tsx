@@ -59,43 +59,50 @@ export default function Navigation() {
     const isAdmin = profile?.role === "admin";
 
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-xl border-b border-gray-200/50 shadow-sm">
+        <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-xl border-b border-white/10 shadow-2xl">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
-                    <Link href="/" className="text-2xl font-serif font-bold text-black hover:text-gray-700 transition-colors">
-                        Fikr
+                    <Link href="/" className="flex items-center hover:opacity-80 transition-opacity duration-300">
+                        <Image
+                            src="/fikr-logo.png"
+                            alt="Fikr"
+                            width={120}
+                            height={40}
+                            className="h-10 w-auto"
+                            priority
+                        />
                     </Link>
 
                     {/* Desktop Navigation */}
                     <div className="hidden md:flex items-center space-x-1">
                         <Link
                             href="/"
-                            className="px-4 py-2 rounded-lg text-gray-700 hover:text-black hover:bg-gray-100/80 transition-all duration-200 font-medium"
+                            className="px-4 py-2 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-all duration-200 font-medium"
                         >
                             Home
                         </Link>
                         <Link
                             href="/blogs"
-                            className="px-4 py-2 rounded-lg text-gray-700 hover:text-black hover:bg-gray-100/80 transition-all duration-200 font-medium"
+                            className="px-4 py-2 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-all duration-200 font-medium"
                         >
                             Blogs
                         </Link>
                         <Link
                             href="/about"
-                            className="px-4 py-2 rounded-lg text-gray-700 hover:text-black hover:bg-gray-100/80 transition-all duration-200 font-medium"
+                            className="px-4 py-2 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-all duration-200 font-medium"
                         >
                             About
                         </Link>
                         <Link
                             href="/contact"
-                            className="px-4 py-2 rounded-lg text-gray-700 hover:text-black hover:bg-gray-100/80 transition-all duration-200 font-medium"
+                            className="px-4 py-2 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-all duration-200 font-medium"
                         >
                             Contact
                         </Link>
                         <Link
                             href="/works"
-                            className="px-4 py-2 rounded-lg text-gray-700 hover:text-black hover:bg-gray-100/80 transition-all duration-200 font-medium"
+                            className="px-4 py-2 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-all duration-200 font-medium"
                         >
                             Works
                         </Link>
@@ -105,7 +112,7 @@ export default function Navigation() {
                             <div className="relative ml-4">
                                 <button
                                     onClick={() => setUserMenuOpen(!userMenuOpen)}
-                                    className="flex items-center gap-3 px-4 py-2 rounded-full bg-gradient-to-r from-gray-900 to-gray-800 hover:from-gray-800 hover:to-gray-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 group"
+                                    className="flex items-center gap-3 px-4 py-2 rounded-full bg-gradient-to-r from-white/20 to-white/10 hover:from-white/30 hover:to-white/20 text-white shadow-lg hover:shadow-xl backdrop-blur-sm border border-white/20 transition-all duration-300 group"
                                 >
                                     {profile?.avatar_url ? (
                                         <Image
@@ -113,10 +120,10 @@ export default function Navigation() {
                                             alt="Avatar"
                                             width={24}
                                             height={24}
-                                            className="rounded-full"
+                                            className="rounded-full ring-2 ring-white/30"
                                         />
                                     ) : (
-                                        <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center">
+                                        <div className="w-6 h-6 rounded-full bg-white/30 flex items-center justify-center">
                                             <User className="w-4 h-4" />
                                         </div>
                                     )}
@@ -133,13 +140,13 @@ export default function Navigation() {
                                             className="fixed inset-0 z-10"
                                             onClick={() => setUserMenuOpen(false)}
                                         />
-                                        <div className="absolute right-0 mt-3 w-64 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-200/50 py-2 z-20 animate-in fade-in slide-in-from-top-2 duration-200">
+                                        <div className="absolute right-0 mt-3 w-64 bg-gray-900/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/10 py-2 z-20 animate-in fade-in slide-in-from-top-2 duration-200">
                                             {/* User Info Header */}
-                                            <div className="px-4 py-3 border-b border-gray-100">
-                                                <p className="text-sm font-semibold text-gray-900">
+                                            <div className="px-4 py-3 border-b border-white/10">
+                                                <p className="text-sm font-semibold text-white">
                                                     {profile?.full_name || "User"}
                                                 </p>
-                                                <p className="text-xs text-gray-500 mt-0.5">
+                                                <p className="text-xs text-white/60 mt-0.5">
                                                     {user.email}
                                                 </p>
                                                 {isAdmin && (
@@ -154,7 +161,7 @@ export default function Navigation() {
                                                 {isAdmin && (
                                                     <Link
                                                         href="/dashboard"
-                                                        className="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 transition-all duration-200 group"
+                                                        className="flex items-center gap-3 px-4 py-2.5 text-white/80 hover:text-white hover:bg-white/10 transition-all duration-200 group"
                                                         onClick={() => setUserMenuOpen(false)}
                                                     >
                                                         <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
@@ -165,7 +172,7 @@ export default function Navigation() {
                                                 )}
                                                 <Link
                                                     href="/profile"
-                                                    className="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 transition-all duration-200 group"
+                                                    className="flex items-center gap-3 px-4 py-2.5 text-white/80 hover:text-white hover:bg-white/10 transition-all duration-200 group"
                                                     onClick={() => setUserMenuOpen(false)}
                                                 >
                                                     <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
@@ -176,10 +183,10 @@ export default function Navigation() {
                                             </div>
 
                                             {/* Sign Out */}
-                                            <div className="border-t border-gray-100 pt-2">
+                                            <div className="border-t border-white/10 pt-2">
                                                 <button
                                                     onClick={handleSignOut}
-                                                    className="w-full flex items-center gap-3 px-4 py-2.5 text-red-600 hover:bg-red-50 transition-all duration-200 group"
+                                                    className="w-full flex items-center gap-3 px-4 py-2.5 text-red-400 hover:text-red-300 hover:bg-red-500/10 transition-all duration-200 group"
                                                 >
                                                     <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
                                                         <LogOut className="w-4 h-4 text-white" />
@@ -194,7 +201,7 @@ export default function Navigation() {
                         ) : (
                             <Link
                                 href="/login"
-                                className="ml-4 px-6 py-2.5 rounded-full bg-gradient-to-r from-black to-gray-800 hover:from-gray-800 hover:to-gray-700 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                                className="ml-4 px-6 py-2.5 rounded-full bg-gradient-to-r from-white to-gray-100 hover:from-gray-100 hover:to-white text-black font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                             >
                                 Sign In
                             </Link>
@@ -204,7 +211,7 @@ export default function Navigation() {
                     {/* Mobile Menu Button */}
                     <button
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        className="md:hidden p-2 rounded-xl hover:bg-gray-100 transition-all duration-200"
+                        className="md:hidden p-2 rounded-xl hover:bg-white/10 transition-all duration-200 text-white"
                     >
                         {mobileMenuOpen ? (
                             <X className="w-6 h-6" />
@@ -217,39 +224,39 @@ export default function Navigation() {
 
             {/* Mobile Menu */}
             {mobileMenuOpen && (
-                <div className="md:hidden bg-white/95 backdrop-blur-xl border-t border-gray-200/50 shadow-lg">
+                <div className="md:hidden bg-black/95 backdrop-blur-xl border-t border-white/10 shadow-lg">
                     <div className="px-4 py-4 space-y-2">
                         <Link
                             href="/"
-                            className="block px-4 py-2.5 text-gray-700 hover:bg-gray-100 rounded-xl transition-all duration-200 font-medium"
+                            className="block px-4 py-2.5 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-200 font-medium"
                             onClick={() => setMobileMenuOpen(false)}
                         >
                             Home
                         </Link>
                         <Link
                             href="/blogs"
-                            className="block px-4 py-2.5 text-gray-700 hover:bg-gray-100 rounded-xl transition-all duration-200 font-medium"
+                            className="block px-4 py-2.5 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-200 font-medium"
                             onClick={() => setMobileMenuOpen(false)}
                         >
                             Blogs
                         </Link>
                         <Link
                             href="/about"
-                            className="block px-4 py-2.5 text-gray-700 hover:bg-gray-100 rounded-xl transition-all duration-200 font-medium"
+                            className="block px-4 py-2.5 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-200 font-medium"
                             onClick={() => setMobileMenuOpen(false)}
                         >
                             About
                         </Link>
                         <Link
                             href="/contact"
-                            className="block px-4 py-2.5 text-gray-700 hover:bg-gray-100 rounded-xl transition-all duration-200 font-medium"
+                            className="block px-4 py-2.5 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-200 font-medium"
                             onClick={() => setMobileMenuOpen(false)}
                         >
                             Contact
                         </Link>
                         <Link
                             href="/works"
-                            className="block px-4 py-2.5 text-gray-700 hover:bg-gray-100 rounded-xl transition-all duration-200 font-medium"
+                            className="block px-4 py-2.5 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-200 font-medium"
                             onClick={() => setMobileMenuOpen(false)}
                         >
                             Works
@@ -257,13 +264,13 @@ export default function Navigation() {
 
                         {/* Mobile Auth Section */}
                         {user ? (
-                            <div className="pt-4 border-t border-gray-200 space-y-2">
+                            <div className="pt-4 border-t border-white/10 space-y-2">
                                 {/* User Info */}
-                                <div className="px-4 py-3 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl">
-                                    <p className="text-sm font-semibold text-gray-900">
+                                <div className="px-4 py-3 bg-white/10 rounded-xl backdrop-blur-sm">
+                                    <p className="text-sm font-semibold text-white">
                                         {profile?.full_name || "User"}
                                     </p>
-                                    <p className="text-xs text-gray-500 mt-0.5">
+                                    <p className="text-xs text-white/60 mt-0.5">
                                         {user.email}
                                     </p>
                                 </div>
@@ -271,7 +278,7 @@ export default function Navigation() {
                                 {isAdmin && (
                                     <Link
                                         href="/dashboard"
-                                        className="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-gray-100 rounded-xl transition-all duration-200"
+                                        className="flex items-center gap-3 px-4 py-2.5 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-200"
                                         onClick={() => setMobileMenuOpen(false)}
                                     >
                                         <LayoutDashboard className="w-5 h-5" />
@@ -280,7 +287,7 @@ export default function Navigation() {
                                 )}
                                 <Link
                                     href="/profile"
-                                    className="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-gray-100 rounded-xl transition-all duration-200"
+                                    className="flex items-center gap-3 px-4 py-2.5 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-200"
                                     onClick={() => setMobileMenuOpen(false)}
                                 >
                                     <User className="w-5 h-5" />
@@ -291,7 +298,7 @@ export default function Navigation() {
                                         handleSignOut();
                                         setMobileMenuOpen(false);
                                     }}
-                                    className="w-full flex items-center gap-3 px-4 py-2.5 text-red-600 hover:bg-red-50 rounded-xl transition-all duration-200"
+                                    className="w-full flex items-center gap-3 px-4 py-2.5 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-xl transition-all duration-200"
                                 >
                                     <LogOut className="w-5 h-5" />
                                     <span className="font-medium">Sign Out</span>
@@ -300,7 +307,7 @@ export default function Navigation() {
                         ) : (
                             <Link
                                 href="/login"
-                                className="block px-4 py-3 bg-gradient-to-r from-black to-gray-800 text-white rounded-xl hover:from-gray-800 hover:to-gray-700 transition-all duration-300 text-center font-semibold shadow-lg mt-4"
+                                className="block px-4 py-3 bg-gradient-to-r from-white to-gray-100 text-black rounded-xl hover:from-gray-100 hover:to-white transition-all duration-300 text-center font-semibold shadow-lg mt-4"
                                 onClick={() => setMobileMenuOpen(false)}
                             >
                                 Sign In
