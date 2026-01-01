@@ -21,7 +21,7 @@ export default async function BlogsPage({ searchParams }: BlogsPageProps) {
         <>
             <Navigation />
 
-            <main className="min-h-screen bg-gray-50 pt-16">
+            <main className="min-h-screen bg-black pt-16">
                 {/* Header */}
                 <section className="py-16 bg-black text-white">
                     <div className="container-custom">

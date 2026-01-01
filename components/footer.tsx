@@ -36,14 +36,13 @@ export default function Footer() {
                     {/* Brand */}
                     <div className="md:col-span-2">
                         <Link href="/" className="inline-block mb-4">
-                            <div className="relative h-16 w-40">
-                                <Image
-                                    src="/images/fikr-logo.png"
-                                    alt="Fikr"
-                                    fill
-                                    className="object-contain"
-                                />
-                            </div>
+                            <Image
+                                src="/fikr-logo.png"
+                                alt="Fikr"
+                                width={160}
+                                height={53}
+                                className="h-12 w-auto"
+                            />
                         </Link>
                         <p className="text-gray-400 mb-6 max-w-md">
                             A premium editorial blog featuring deep thoughts, insights, and stories that shape tomorrow.
