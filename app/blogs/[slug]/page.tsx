@@ -46,7 +46,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <ReadingProgress />
             <Navigation />
 
-            <main className="min-h-screen bg-white pt-20">
+            <main className="min-h-screen bg-white pt-16">
                 {/* Hero Section */}
                 <article className="relative">
                     {/* Featured Image */}

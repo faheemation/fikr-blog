@@ -17,7 +17,7 @@ export default function WorksPage() {
         <>
             <Navigation />
 
-            <main className="min-h-screen bg-white pt-20">
+            <main className="min-h-screen bg-white pt-16">
                 {/* Hero */}
                 <section className="py-24 bg-black text-white">
                     <div className="container-custom">

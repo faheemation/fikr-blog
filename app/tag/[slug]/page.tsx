@@ -23,7 +23,7 @@ export default async function TagPage({ params }: TagPageProps) {
         <>
             <Navigation />
 
-            <main className="min-h-screen bg-white pt-20">
+            <main className="min-h-screen bg-gray-50 pt-16">
                 {/* Tag Header */}
                 <section className="py-16 bg-gradient-to-b from-neutral-50 to-white">
                     <div className="container-custom">
