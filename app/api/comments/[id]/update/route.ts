@@ -3,10 +3,11 @@ import { NextResponse } from "next/server";
 
 export async function PATCH(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         const supabase = await createClient();
+        const { id } = await params;
 
         // Check authentication
         const {
@@ -39,7 +40,7 @@ export async function PATCH(
         const { data: existingComment } = await supabase
             .from("comments")
             .select("id, user_id")
-            .eq("id", params.id)
+            .eq("id", id)
             .single();
 
         if (!existingComment) {
