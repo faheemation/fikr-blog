@@ -15,13 +15,13 @@ const socialLinks = [
 const footerLinks = {
     explore: [
         { label: "Home", href: "/" },
-        { label: "All Blogs", href: "/blogs" },
-        { label: "Works", href: "/works" },
-    ],
-    about: [
-        { label: "About Me", href: "/about" },
+        { label: "Blogs", href: "/blogs" },
+        { label: "About", href: "/about" },
         { label: "Contact", href: "/contact" },
-        { label: "Dashboard", href: "/dashboard" },
+    ],
+    legal: [
+        { label: "Privacy Policy", href: "/privacy" },
+        { label: "Terms of Service", href: "/terms" },
     ],
 };
 
@@ -84,11 +84,11 @@ export default function Footer() {
                         </ul>
                     </div>
 
-                    {/* About */}
+                    {/* Legal */}
                     <div>
-                        <h3 className="text-white font-semibold mb-4">About</h3>
+                        <h3 className="text-white font-semibold mb-4">Legal</h3>
                         <ul className="space-y-2">
-                            {footerLinks.about.map((link) => (
+                            {footerLinks.legal.map((link) => (
                                 <li key={link.href}>
                                     <Link
                                         href={link.href}
