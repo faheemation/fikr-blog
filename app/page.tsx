@@ -4,6 +4,7 @@ import Footer from "@/components/footer";
 import FeaturedCarousel from "@/components/featured-carousel";
 import CategoryBadge from "@/components/category-badge";
 import TagBadge from "@/components/tag-badge";
+import DonationCTA from "@/components/donation-cta";
 import { getFeaturedPosts, getPosts } from "@/lib/db/posts";
 import { getAllCategories, getAllTags } from "@/lib/db/categories";
 import Link from "next/link";
