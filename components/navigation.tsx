@@ -106,6 +106,12 @@ export default function Navigation() {
                         >
                             Works
                         </Link>
+                        <Link
+                            href="/donate"
+                            className="px-4 py-2 rounded-lg bg-gradient-to-r from-pink-500 to-purple-500 text-white hover:from-pink-600 hover:to-purple-600 transition-all duration-200 font-semibold shadow-lg ml-2"
+                        >
+                            ❤️ Donate
+                        </Link>
 
                         {/* Auth Section */}
                         {user ? (
