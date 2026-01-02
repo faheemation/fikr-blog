@@ -255,6 +255,13 @@ export default function Navigation() {
                             Contact
                         </Link>
                         <Link
+                            href="/donate"
+                            className="block px-4 py-2.5 bg-gradient-to-r from-pink-500 to-purple-500 text-white hover:from-pink-600 hover:to-purple-600 rounded-xl transition-all duration-200 font-semibold text-center shadow-lg"
+                            onClick={() => setMobileMenuOpen(false)}
+                        >
+                            ❤️ Donate
+                        </Link>
+                        <Link
                             href="/works"
                             className="block px-4 py-2.5 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-200 font-medium"
                             onClick={() => setMobileMenuOpen(false)}

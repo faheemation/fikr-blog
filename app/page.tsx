@@ -157,6 +157,9 @@ export default async function Home() {
                 </section>
             )}
 
+            {/* Donation CTA */}
+            <DonationCTA />
+
             {/* Want to Write Section */}
             <section className="py-24 bg-neutral-50">
                 <div className="container-custom">
