@@ -66,7 +66,7 @@ export default function DonatePage() {
             icon: Star,
             name: "Generous Supporter",
             amount: 500,
-            description: "Make a generous one-time contribution (monthly coming soon!)",
+            description: "Make a generous one-time contribution of ₹500",
             color: "from-purple-500 to-pink-600",
         },
         {
