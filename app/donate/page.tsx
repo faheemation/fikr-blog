@@ -1,21 +1,56 @@
+"use client";
+
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import { Heart, Coffee, Star, Sparkles, Users, BookOpen, TrendingUp } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function DonatePage() {
+    const [customAmount, setCustomAmount] = useState("");
+    const [donorName, setDonorName] = useState("");
+    const [donorMessage, setDonorMessage] = useState("");
+
+    const UPI_ID = "faheemabraar@fam";
+    const PAYEE_NAME = "Fikr Blog";
+
+    const generateUPILink = (amount: number) => {
+        const params = new URLSearchParams({
+            pa: UPI_ID,
+            pn: PAYEE_NAME,
+            am: amount.toString(),
+            cu: "INR",
+            tn: donorMessage || "Donation to Fikr Blog"
+        });
+        return `upi://pay?${params.toString()}`;
+    };
+
+    const handleDonate = (amount: number) => {
+        const upiLink = generateUPILink(amount);
+        window.location.href = upiLink;
+    };
+
+    const handleCustomDonate = () => {
+        const amount = parseFloat(customAmount);
+        if (amount && amount > 0) {
+            handleDonate(amount);
+        } else {
+            alert("Please enter a valid amount");
+        }
+    };
+
     const donationTiers = [
         {
             icon: Coffee,
             name: "Buy us a Coffee",
-            amount: "₹50",
+            amount: 50,
             description: "Help keep our writers caffeinated and creative",
             color: "from-amber-500 to-orange-600",
         },
         {
             icon: BookOpen,
             name: "Support a Story",
-            amount: "₹200",
+            amount: 200,
             description: "Fund the research and writing of quality articles",
             color: "from-blue-500 to-indigo-600",
             popular: true,
@@ -23,14 +58,14 @@ export default function DonatePage() {
         {
             icon: Star,
             name: "Monthly Patron",
-            amount: "₹500/mo",
+            amount: 500,
             description: "Become a recurring supporter of thoughtful discourse",
             color: "from-purple-500 to-pink-600",
         },
         {
             icon: Sparkles,
             name: "Premium Supporter",
-            amount: "₹1000",
+            amount: 1000,
             description: "Make a significant impact on our mission",
             color: "from-emerald-500 to-teal-600",
         },
@@ -86,6 +121,37 @@ export default function DonatePage() {
                     </div>
                 </section>
 
+                {/* Optional Donor Info */}
+                <section className="py-12 bg-gray-50">
+                    <div className="container-custom max-w-2xl">
+                        <div className="bg-white rounded-2xl p-8 shadow-lg border-2 border-gray-100">
+                            <h3 className="text-2xl font-bold text-black mb-4">Leave a Message (Optional)</h3>
+                            <div className="space-y-4">
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-2">Your Name</label>
+                                    <input
+                                        type="text"
+                                        value={donorName}
+                                        onChange={(e) => setDonorName(e.target.value)}
+                                        placeholder="Anonymous"
+                                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-black focus:outline-none"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                                    <textarea
+                                        value={donorMessage}
+                                        onChange={(e) => setDonorMessage(e.target.value)}
+                                        placeholder="Your message will appear in the UPI payment description"
+                                        rows={3}
+                                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-black focus:outline-none"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 {/* Donation Tiers */}
                 <section className="py-24 bg-gray-50">
                     <div className="container-custom">
@@ -119,11 +185,14 @@ export default function DonatePage() {
 
                                     <h3 className="text-2xl font-bold text-black mb-2">{tier.name}</h3>
                                     <p className="text-4xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent mb-4">
-                                        {tier.amount}
+                                        ₹{tier.amount}
                                     </p>
                                     <p className="text-gray-600 mb-6 leading-relaxed">{tier.description}</p>
 
-                                    <button className={`w-full py-3 rounded-xl font-semibold text-white bg-gradient-to-r ${tier.color} hover:opacity-90 transition-all duration-300 transform hover:scale-105`}>
+                                    <button
+                                        onClick={() => handleDonate(tier.amount)}
+                                        className={`w-full py-3 rounded-xl font-semibold text-white bg-gradient-to-r ${tier.color} hover:opacity-90 transition-all duration-300 transform hover:scale-105`}
+                                    >
                                         Donate Now
                                     </button>
                                 </div>
@@ -141,11 +210,16 @@ export default function DonatePage() {
                                     <div className="flex-1">
                                         <input
                                             type="number"
+                                            value={customAmount}
+                                            onChange={(e) => setCustomAmount(e.target.value)}
                                             placeholder="Enter amount (₹)"
                                             className="w-full px-6 py-4 rounded-xl border-2 border-gray-200 focus:border-black focus:outline-none text-lg"
                                         />
                                     </div>
-                                    <button className="px-8 py-4 rounded-xl font-semibold text-white bg-gradient-to-r from-black to-gray-800 hover:from-gray-800 hover:to-gray-700 transition-all duration-300">
+                                    <button
+                                        onClick={handleCustomDonate}
+                                        className="px-8 py-4 rounded-xl font-semibold text-white bg-gradient-to-r from-black to-gray-800 hover:from-gray-800 hover:to-gray-700 transition-all duration-300"
+                                    >
                                         Donate
                                     </button>
                                 </div>
@@ -202,11 +276,14 @@ export default function DonatePage() {
                             Every Contribution Counts
                         </h2>
                         <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-                            Whether it's the price of a coffee or a monthly subscription, your support makes a real difference.
+                            Payments are processed securely through UPI. Your donation goes directly to supporting our content creation.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <button className="px-8 py-4 rounded-full font-semibold text-black bg-white hover:bg-gray-100 transition-all duration-300 transform hover:scale-105">
-                                Make a One-Time Donation
+                            <button
+                                onClick={() => handleDonate(100)}
+                                className="px-8 py-4 rounded-full font-semibold text-black bg-white hover:bg-gray-100 transition-all duration-300 transform hover:scale-105"
+                            >
+                                Donate ₹100
                             </button>
                             <Link
                                 href="/blogs"
