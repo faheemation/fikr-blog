@@ -47,13 +47,14 @@ export default function FeaturedCarousel({ posts }: FeaturedCarouselProps) {
         setCurrentIndex((prev) => (prev - 1 + posts.length) % posts.length);
     };
 
-    // Handle swipe gestures on mobile
+    // Handle swipe gestures on mobile - more sensitive
     const handleDragEnd = (e: any, { offset, velocity }: PanInfo) => {
         const swipe = Math.abs(offset.x) * velocity.x;
 
-        if (swipe < -10000) {
+        // Reduced threshold for easier swiping
+        if (swipe < -5000 || offset.x < -100) {
             handleNext();
-        } else if (swipe > 10000) {
+        } else if (swipe > 5000 || offset.x > 100) {
             handlePrev();
         }
     };

@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import Link from "next/link";
 import { Plus, Edit2, Trash2, Eye } from "lucide-react";
 import { redirect } from "next/navigation";
+import DeleteButton from "@/components/dashboard/delete-button";
 
 export default async function PostsPage() {
     const supabase = await createClient();
@@ -83,10 +84,10 @@ export default async function PostsPage() {
                                     <td className="px-6 py-4">
                                         <span
                                             className={`px-3 py-1 rounded-full text-xs font-medium ${post.status === "published"
-                                                    ? "bg-green-100 text-green-700"
-                                                    : post.status === "draft"
-                                                        ? "bg-yellow-100 text-yellow-700"
-                                                        : "bg-blue-100 text-blue-700"
+                                                ? "bg-green-100 text-green-700"
+                                                : post.status === "draft"
+                                                    ? "bg-yellow-100 text-yellow-700"
+                                                    : "bg-blue-100 text-blue-700"
                                                 }`}
                                         >
                                             {post.status}
@@ -96,12 +97,15 @@ export default async function PostsPage() {
                                         {new Date(post.created_at).toLocaleDateString()}
                                     </td>
                                     <td className="px-6 py-4 text-right">
-                                        <Link
-                                            href={`/dashboard/posts/${post.id}/edit`}
-                                            className="text-black hover:text-gray-700 font-medium text-sm"
-                                        >
-                                            Edit
-                                        </Link>
+                                        <div className="flex items-center justify-end gap-3">
+                                            <Link
+                                                href={`/dashboard/posts/${post.id}/edit`}
+                                                className="text-black hover:text-gray-700 font-medium text-sm"
+                                            >
+                                                Edit
+                                            </Link>
+                                            <DeleteButton postId={post.id} postTitle={post.title} />
+                                        </div>
                                     </td>
                                 </tr>
                             ))}
@@ -139,10 +143,10 @@ export default async function PostsPage() {
                                 </span>
                                 <span
                                     className={`px-2 py-1 rounded-full text-xs font-medium ${post.status === "published"
-                                            ? "bg-green-100 text-green-700"
-                                            : post.status === "draft"
-                                                ? "bg-yellow-100 text-yellow-700"
-                                                : "bg-blue-100 text-blue-700"
+                                        ? "bg-green-100 text-green-700"
+                                        : post.status === "draft"
+                                            ? "bg-yellow-100 text-yellow-700"
+                                            : "bg-blue-100 text-blue-700"
                                         }`}
                                 >
                                     {post.status}
@@ -167,6 +171,9 @@ export default async function PostsPage() {
                                 >
                                     <Eye className="w-4 h-4" />
                                 </Link>
+                                <div className="flex items-center">
+                                    <DeleteButton postId={post.id} postTitle={post.title} />
+                                </div>
                             </div>
                         </div>
                     ))
