@@ -5,8 +5,10 @@ import Footer from "@/components/footer";
 import { Heart, Coffee, Star, Sparkles, Users, BookOpen, TrendingUp } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function DonatePage() {
+    const router = useRouter();
     const [customAmount, setCustomAmount] = useState("");
     const [donorName, setDonorName] = useState("");
     const [donorMessage, setDonorMessage] = useState("");
@@ -28,6 +30,11 @@ export default function DonatePage() {
     const handleDonate = (amount: number) => {
         const upiLink = generateUPILink(amount);
         window.location.href = upiLink;
+
+        // Redirect to thank you page after a short delay
+        setTimeout(() => {
+            router.push('/donate/thank-you');
+        }, 2000);
     };
 
     const handleCustomDonate = () => {
@@ -57,9 +64,9 @@ export default function DonatePage() {
         },
         {
             icon: Star,
-            name: "Monthly Patron",
+            name: "Generous Supporter",
             amount: 500,
-            description: "Become a recurring supporter of thoughtful discourse",
+            description: "Make a generous one-time contribution (monthly coming soon!)",
             color: "from-purple-500 to-pink-600",
         },
         {
